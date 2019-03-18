@@ -26,3 +26,50 @@ int main() {
 }
 ```
 input的定义应在foo函数之前。
+
+### L4-引用与复制-2019
+```
+class Complex {
+public:
+    string Name;
+    Complex(string s="empty"):Name(s){}
+    ~Complex(){printf("del %s\n",Name.c_str());}
+};
+Complex Func(Complex c){
+    Complex tmp("tmp");
+    return tmp;
+}
+```
+在开启返回值优化(RVO)时，tmp变量是否被析构取决于调用，若函数返回值用于赋值的话不会被析构。
+
+不会被析构：
+```
+{
+    Complex a=Func(Complex("c"));
+    a.Name="a";
+}
+```
+程序输出:
+```
+del c
+del a
+```
+
+会被析构：
+```
+int main(){
+    Complex a;
+    Func(Complex("c"));
+    a.Name="a";
+}
+```
+程序输出:
+```
+del tmp
+del c
+del a
+```
+感谢小教员@黄博文的注解
+
+
+
