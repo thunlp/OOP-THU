@@ -44,7 +44,7 @@ Complex Func(Complex c){
 
 不会被析构：
 ```
-{
+int main(){
     Complex a=Func(Complex("c"));
     a.Name="a";
 }
