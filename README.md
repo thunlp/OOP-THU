@@ -28,6 +28,8 @@ int main() {
 input的定义应在foo函数之前。
 
 ### L4-引用与复制-2019
+第42页std::move的描述有误，具体参见https://www.zhihu.com/question/50652989
+
 ```
 class Complex {
 public:
